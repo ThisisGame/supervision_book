@@ -1,2 +1,6 @@
 /*.mp4
 /*.pt
+/files/supervision/*.pt
+/files/supervision/*.mp4
+/.vscode
+/.notes
