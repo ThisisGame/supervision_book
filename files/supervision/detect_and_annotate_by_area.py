@@ -23,5 +23,8 @@ annotated_image = box_annotator.annotate(
 annotated_image = label_annotator.annotate(
     scene=annotated_image, detections=detections, labels=labels)
 
+# 保存处理后的图像（文件路径可自定义）
+cv2.imwrite("detect_and_annotate_by_area.png", annotated_image)
+
 cv2.imshow("YOLOv8", annotated_image)
 cv2.waitKey(0)

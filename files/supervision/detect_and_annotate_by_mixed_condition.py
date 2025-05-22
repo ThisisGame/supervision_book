@@ -7,14 +7,19 @@ model = YOLO("yolov8n.pt")
 image = cv2.imread("supervision-detection-by-specific.png")
 
 results = model(image)[0]
+
+# 获取检测结果
 detections = sv.Detections.from_ultralytics(results)
 
-# 计算检测框的宽度和高度
-w = detections.xyxy[:, 2] - detections.xyxy[:, 0]
-h = detections.xyxy[:, 3] - detections.xyxy[:, 1]
+# 定义多边形区域的顶点（示例为一个四边形）
+polygon = np.array([[0, 800], [0, 0], [800, 0], [800, 800]])
+zone = sv.PolygonZone(polygon=polygon)
 
-# 只保留宽度和高度都大于200的检测框
-detections = detections[(w > 200) & (h > 200)]
+# 生成掩码（True表示检测框在区域内）
+mask = zone.trigger(detections=detections)
+
+# 应用过滤，仅保留区域内的检测结果，且只对可信度大于0.5的进行标注
+detections = detections[mask & (detections.confidence > 0.5)]
 
 box_annotator = sv.BoxAnnotator()
 label_annotator = sv.LabelAnnotator()
@@ -32,7 +37,7 @@ annotated_image = label_annotator.annotate(
 
 
 # 保存处理后的图像（文件路径可自定义）
-cv2.imwrite("detect_and_annotate_by_box_dimensions.png", annotated_image)
+cv2.imwrite("detect_and_annotate_by_mixed_condition.png", annotated_image)
 
 cv2.imshow("YOLOv8", annotated_image)
 cv2.waitKey(0)
