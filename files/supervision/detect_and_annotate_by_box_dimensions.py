@@ -3,11 +3,14 @@ import supervision as sv
 from ultralytics import YOLO
 import numpy as np
 
-model = YOLO("yolov8n.pt")
+model = YOLO("yolov8n.pt").to('cuda')  # 将模型加载到GPU
 image = cv2.imread("supervision-detection-by-specific.png")
 
-results = model(image)[0]
+results = model(image , device=1)[0]
 detections = sv.Detections.from_ultralytics(results)
+
+# 输出检测结果
+print(f"检测到的目标数量: {len(detections)}")
 
 # 计算检测框的宽度和高度
 w = detections.xyxy[:, 2] - detections.xyxy[:, 0]
