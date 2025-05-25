@@ -123,5 +123,90 @@ detections = sv.Detections.from_ultralytics(results)
 
 ![](../../imgs/supervision/detect_small_objects_up_resolution_8.png)
 
-放大倍数越高，能检测到的物体就更多了，但是处理事件也更长。
+放大倍数越高，能检测到的物体就更多了，但是处理时间也更长。
 
+### 切片分块检测
+
+将图片切成多个小块进行检测，这有点像提升分辨率的做法。
+
+将图片切成小块后，每个小块都以默认分辨率(例如640)进行处理，这样就提高了识别率。
+
+```python
+#file:files\supervision\detect_small_objects_inference_slicer.py
+
+import cv2
+import numpy as np
+import supervision as sv
+from ultralytics import YOLO
+
+model = YOLO("yolov8x.pt")
+image = cv2.imread("small_objects.jpeg")
+
+# 对每个切成小块的图像进行推理
+def callback(image_slice: np.ndarray) -> sv.Detections:
+    result = model(image_slice)[0]
+    return sv.Detections.from_ultralytics(result)
+
+slicer = sv.InferenceSlicer(callback = callback)
+detections = slicer(image)# 使用InferenceSlicer进行小物体检测
+
+box_annotator = sv.BoxAnnotator()
+label_annotator = sv.LabelAnnotator()
+
+annotated_image = box_annotator.annotate(
+    scene=image, detections=detections)
+annotated_image = label_annotator.annotate(
+    scene=annotated_image, detections=detections)
+
+# 保存处理后的图像（文件路径可自定义）
+cv2.imwrite("detect_small_objects_inference_slicer.png", annotated_image)
+
+cv2.imshow("YOLOv8", annotated_image)
+cv2.waitKey(0)
+```
+
+![](../../imgs/supervision/detect_small_objects_inference_slicer.png)
+
+
+### 小物体分割着色
+
+InferenceSlicer除了执行标注任务，也可以执行分割着色任务。
+
+使用分割着色模型(yolov8x-seg)进行小物体检测着色。
+
+```python
+#file:files\supervision\detect_small_objects_segmentation.py
+
+import cv2
+import numpy as np
+import supervision as sv
+from ultralytics import YOLO
+
+model = YOLO("yolov8x-seg.pt")
+image = cv2.imread("small_objects.jpeg")
+
+# 使用分割着色模型(yolov8x-seg)进行小物体检测，InferenceSlicer也可以执行分割着色任务。
+
+def callback(image_slice: np.ndarray) -> sv.Detections:
+    result = model(image_slice)[0]
+    return sv.Detections.from_ultralytics(result)
+
+slicer = sv.InferenceSlicer(callback = callback)
+detections = slicer(image)
+
+mask_annotator = sv.MaskAnnotator()
+label_annotator = sv.LabelAnnotator()
+
+annotated_image = mask_annotator.annotate(
+    scene=image, detections=detections)
+annotated_image = label_annotator.annotate(
+    scene=annotated_image, detections=detections)
+
+# 保存处理后的图像（文件路径可自定义）
+cv2.imwrite("detect_small_objects_segmentation.png", annotated_image)
+
+cv2.imshow("YOLOv8", annotated_image)
+cv2.waitKey(0)
+```
+
+![](../../imgs/supervision/detect_small_objects_segmentation.png)
