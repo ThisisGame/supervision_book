@@ -25,25 +25,25 @@
             "copyButtons": true
         },
         "github": {
-            "url": "https://github.com/ThisisGame/imgui_web_book"
+            "url": "https://github.com/ThisisGame/supervision_book"
         }
     },
     "openresty":{
         "zh":{
             "bookName":"ImGui-WebAssembly",
-            "codeResourcesDownloadUrl":"https://github.com/ThisisGame/imgui_web_book",
-            "githubRepositoryUrl":"https://github.com/ThisisGame/imgui_web_book",
-            "beginNotice":"\n```text \n「ImGui Web」是一本开源电子书，PDF/随书代码/资源下载： https://github.com/ThisisGame/imgui_web_book \n```",
+            "codeResourcesDownloadUrl":"https://github.com/ThisisGame/supervision_book",
+            "githubRepositoryUrl":"https://github.com/ThisisGame/supervision_book",
+            "beginNotice":"\n```text \n「supervision book」是一本开源电子书，PDF/随书代码/资源下载： https://github.com/ThisisGame/supervision_book \n```",
             "beginNoticeShowConditionNeedLineNum":10,
-            "antiCollectorAdTxt":"<a id=\"antiCollectorAdTxt\" href=\"https://github.com/ThisisGame/imgui_web_book\">「ImGui Web」是一本开源电子书，PDF/随书代码/资源下载： https://github.com/ThisisGame/imgui_web_book</a>"
+            "antiCollectorAdTxt":"<a id=\"antiCollectorAdTxt\" href=\"https://github.com/ThisisGame/supervision_book\">「supervision book」是一本开源电子书，PDF/随书代码/资源下载： https://github.com/ThisisGame/supervision_book</a>"
         },
         "en":{
             "bookName":"ImGui-WebAssembly",
-            "codeResourcesDownloadUrl":"https://github.com/ThisisGame/imgui_web_book",
-            "githubRepositoryUrl":"https://github.com/ThisisGame/imgui_web_book",
-            "beginNotice":"\n```text \n「ImGui Web」是一本开源电子书，PDF/随书代码/资源下载： https://github.com/ThisisGame/imgui_web_book \n```",
+            "codeResourcesDownloadUrl":"https://github.com/ThisisGame/supervision_book",
+            "githubRepositoryUrl":"https://github.com/ThisisGame/supervision_book",
+            "beginNotice":"\n```text \n「supervision book」是一本开源电子书，PDF/随书代码/资源下载： https://github.com/ThisisGame/supervision_book \n```",
             "beginNoticeShowConditionNeedLineNum":10,
-            "antiCollectorAdTxt":"<a id=\"antiCollectorAdTxt\" href=\"https://github.com/ThisisGame/imgui_web_book\">「ImGui Web」是一本开源电子书，PDF/随书代码/资源下载： https://github.com/ThisisGame/imgui_web_book</a>"
+            "antiCollectorAdTxt":"<a id=\"antiCollectorAdTxt\" href=\"https://github.com/ThisisGame/supervision_book\">「supervision book」是一本开源电子书，PDF/随书代码/资源下载： https://github.com/ThisisGame/supervision_book</a>"
         }
         
     }

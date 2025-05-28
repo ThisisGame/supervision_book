@@ -3,7 +3,7 @@ import albumentations as A
 
 augmentation = A.Compose([
     A.Perspective(p=0.1),
-    A.HorizontalFlip(p=0.5),
+    A.HorizontalFlip(p=1.0),
     A.RandomBrightnessContrast(p=0.5)
 ], bbox_params=A.BboxParams(format="pascal_voc", label_fields=["category"]))
 
