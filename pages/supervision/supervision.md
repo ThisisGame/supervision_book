@@ -6,7 +6,7 @@ SuperVision是对Yolo等图像识别库的一个封装，另加了标注功能�
 
 后续代码都使用Yolo。
 
-<video src="./../../imgs/supervision/traffic_analysis_result.mp4" controls width="80%"></video>
+<video src="https://media.roboflow.com/traffic_analysis_result.mp4" controls width="80%"></video>
 
 ### 安装开发环境
 
